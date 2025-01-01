@@ -2,20 +2,20 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from models import init_db, add_user, get_user, add_task, get_tasks, complete_task, delete_task
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # 用于 session 加密
+app.secret_key = '213212541'  # 用于 session 加密
 
 init_db()  # 初始化数据库
 
 
-@app.route('/')
+@app.route('/')#根目录
 def index():
-    if 'user_id' not in session:
+    if 'user_id' not in session: ## 检测是否登录转入登录界面或者注册界面
         return redirect(url_for('login'))
     tasks = get_tasks(session['user_id'])
     return render_template('index.html', tasks=tasks)
 
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/add', methods=['GET', 'POST'])##添加任务界面
 def add():
     if 'user_id' not in session:
         return redirect(url_for('login'))
@@ -26,7 +26,7 @@ def add():
     return render_template('add_task.html')
 
 
-@app.route('/complete/<int:task_id>')
+@app.route('/complete/<int:task_id>')  ##任务完成后划出
 def complete(task_id):
     if 'user_id' not in session:
         return redirect(url_for('login'))

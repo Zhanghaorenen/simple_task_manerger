@@ -65,10 +65,10 @@ def register():
         username = request.form['username']
         password = request.form['password']
         if get_user(username):
-            flash('Username already exists.')
+            flash('用户名已经存在.')
         else:
             add_user(username, password)
-            flash('Registration successful! You can now log in.')
+            flash('注册成功! 你可以登录了')
             return redirect(url_for('login'))
     return render_template('register.html')
 

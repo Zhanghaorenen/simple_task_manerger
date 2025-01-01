@@ -2,7 +2,11 @@
 
 {% block content %}
 <div class="my-3">
-    <a href="{{ url_for('add') }}" class="btn btn-primary">添加任务</a>
+<a href="{{ url_for('add') }}" class="btn btn-primary"><span style="color: green;">
+    <button title="点我就对了">添加任务</button> </span></a>
+    <hr>
+    <a href="{{ url_for('logout') }}" class="btn btn-retire">退出</a>
+<!--这是一个个注释-->
 </div>
 <ul class="list-group">
     {% for task in tasks %}
@@ -10,11 +14,16 @@
         <span style="text-decoration: {{ 'line-through' if task[2] else 'none' }}">{{ task[1] }}</span>
         <div>
             {% if not task[2] %}
-            <a href="{{ url_for('complete', task_id=task[0]) }}" class="btn btn-success btn-sm">Complete</a>
+            <a href="{{ url_for('complete', task_id=task[0]) }}" class="btn btn-success btn-sm" style="text-align:left">完成</a>
             {% endif %}
-            <a href="{{ url_for('delete', task_id=task[0]) }}" class="btn btn-danger btn-sm">Delete</a>
+            <a href="{{ url_for('delete', task_id=task[0]) }}" class="btn btn-danger btn-sm">删除</a>
+
         </div>
+
     </li>
+
     {% endfor %}
+
 </ul>
 {% endblock %}
+

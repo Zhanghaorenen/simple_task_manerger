@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="my-3">
+    <a href="{{ url_for('add') }}" class="btn btn-primary">添加任务</a>
+</div>
+<ul class="list-group">
+    {% for task in tasks %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span style="text-decoration: {{ 'line-through' if task[2] else 'none' }}">{{ task[1] }}</span>
+        <div>
+            {% if not task[2] %}
+            <a href="{{ url_for('complete', task_id=task[0]) }}" class="btn btn-success btn-sm">Complete</a>
+            {% endif %}
+            <a href="{{ url_for('delete', task_id=task[0]) }}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
